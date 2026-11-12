@@ -242,7 +242,7 @@ export default function Home() {
 
             <dl className="self-end lg:col-span-3 lg:col-start-10">
               {[
-                ["70%", "AI focus"],
+                ["100%", "AI enablement and cloud focused"],
                 ["2", "Countries"],
                 ["1", "Point of contact"],
               ].map(([v, l]) => (
