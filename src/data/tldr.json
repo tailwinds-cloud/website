@@ -1,0 +1,71 @@
+{
+  "updated": "2026-11-11T22:16:40.652Z",
+  "feeds": [
+    {
+      "id": "ai",
+      "name": "TLDR AI",
+      "url": "https://tldr.tech/api/rss/ai",
+      "home": "https://tldr.tech/ai",
+      "items": [
+        {
+          "title": "Gemini 4 Carbon ⚡, Claude Sheets 📊, Antigravity Swarm 🤖",
+          "link": "https://tldr.tech/ai/2026-11-11",
+          "date": "2026-11-11T00:00:00.000Z"
+        },
+        {
+          "title": "Claude Fable 5.2 ✨, Meta Ember 🤖, Google’s new TPUs ⚡",
+          "link": "https://tldr.tech/ai/2026-11-10",
+          "date": "2026-11-10T00:00:00.000Z"
+        },
+        {
+          "title": "AI R&D accelerates 📈, OpenAI at $1.25T 💰, GitHub’s multiplayer harness 🤖",
+          "link": "https://tldr.tech/ai/2026-11-09",
+          "date": "2026-11-09T00:00:00.000Z"
+        },
+        {
+          "title": "Anthropic R&D accelerates 📈, GPT-6 Cyber 🔐, Inkling 2 Small 🧠",
+          "link": "https://tldr.tech/ai/2026-11-06",
+          "date": "2026-11-06T00:00:00.000Z"
+        },
+        {
+          "title": "GPT-Image-2.6 🖼️, Meta buys Conductor 💻, Cognition SWE-2 Flash ⚡",
+          "link": "https://tldr.tech/ai/2026-11-05",
+          "date": "2026-11-05T00:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "dev",
+      "name": "TLDR Dev",
+      "url": "https://tldr.tech/api/rss/dev",
+      "home": "https://tldr.tech/dev",
+      "items": [
+        {
+          "title": "Gemini 4 Carbon 💎, codebase rewrites are back 🔄, MCP vs CLI 🔐",
+          "link": "https://tldr.tech/dev/2026-11-11",
+          "date": "2026-11-11T00:00:00.000Z"
+        },
+        {
+          "title": "Claude Fable 5.2 🧠, new ultra-fast mobile framework 📱, understanding AI slop 🫟",
+          "link": "https://tldr.tech/dev/2026-11-10",
+          "date": "2026-11-10T00:00:00.000Z"
+        },
+        {
+          "title": "X rebuilds its web app 🛠️, Uber secures AI agents 🔐, WebMCP in practice 🌐",
+          "link": "https://tldr.tech/dev/2026-11-09",
+          "date": "2026-11-09T00:00:00.000Z"
+        },
+        {
+          "title": "Discord ditches Electron ⚡️, cheaper frontier AI 💸, React's hidden 300 ms delay ⏱️",
+          "link": "https://tldr.tech/dev/2026-11-06",
+          "date": "2026-11-06T00:00:00.000Z"
+        },
+        {
+          "title": "OpenAI’s security pipeline  🧮, Parcel's Rust rewrite 🦀, DOOM's code DNA 🧬",
+          "link": "https://tldr.tech/dev/2026-11-05",
+          "date": "2026-11-05T00:00:00.000Z"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/* Tailwinds Cloud Technologies brand palette (see README) */
+@theme {
+  --color-navy: #0a2d6b;   /* Tailwinds Navy  – primary dark accent & text */
+  --color-ocean: #0f62fe;  /* Deep Ocean Blue – primary action colour     */
+  --color-azure: #2e9bff;  /* Sky Blue        – mid-tone accent           */
+  --color-cloud: #7fd8ff;  /* Cloud Blue      – light highlight           */
+  --color-mist: #e6f7ff;   /* Mist Blue       – soft background tint      */
+  --color-ink: #13213d;    /* body text (navy-tinted near-black)          */
+  --color-slate-ink: #4a5a78;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-montserrat), var(--font-inter), ui-sans-serif, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: #fff;
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-cloud);
+  color: var(--color-navy);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

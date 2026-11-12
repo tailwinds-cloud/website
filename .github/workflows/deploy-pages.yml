@@ -1,0 +1,49 @@
+# Build the static site and deploy it to GitHub Pages.
+# Runs on every push to main, once a day (to refresh the TLDR Insights feed), and on demand.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "30 13 * * *" # daily, 13:30 UTC (after TLDR's morning issues are published)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build (fetches TLDR feed via prebuild)
+        run: npm run build
+        env:
+          # Settings → Secrets and variables → Actions → Variables → GA_MEASUREMENT_ID
+          NEXT_PUBLIC_GA_ID: ${{ vars.GA_MEASUREMENT_ID }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
