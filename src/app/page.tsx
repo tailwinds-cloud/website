@@ -145,6 +145,42 @@ const faqs = [
   },
 ];
 
+/* ------------------------------------------------------------------ art */
+
+/** Streamlines swept up and to the right, like the arrow in the mark: the one decorative motif. */
+function WindLines({ className = "" }: { className?: string }) {
+  const lines = [
+    [0, 0.9, 1.6],
+    [26, 0.7, 1.2],
+    [52, 0.55, 1],
+    [78, 0.4, 1],
+    [104, 0.3, 1],
+    [130, 0.2, 1],
+  ] as const;
+  return (
+    <svg viewBox="0 0 1200 560" fill="none" aria-hidden className={className} preserveAspectRatio="xMaxYMax slice">
+      {lines.map(([d, o, w]) => (
+        <path
+          key={d}
+          d={`M-40 ${560 - d * 0.4} C 360 ${560 - d * 0.6}, 760 ${470 - d}, 1240 ${70 - d * 0.5}`}
+          stroke="currentColor"
+          strokeOpacity={o}
+          strokeWidth={w}
+        />
+      ))}
+    </svg>
+  );
+}
+
+/** Hand-drawn underline in the shape of the swoosh, used once under the headline. */
+function Swoosh({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 300 24" fill="none" aria-hidden className={className} preserveAspectRatio="none">
+      <path d="M3 19 C 80 22, 190 18, 296 4" stroke="currentColor" strokeWidth={6} strokeLinecap="round" />
+    </svg>
+  );
+}
+
 /* ------------------------------------------------------------------ page */
 
 export default function Home() {
@@ -152,7 +188,7 @@ export default function Home() {
     <>
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-full focus:bg-navy focus:px-4 focus:py-2 focus:text-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-md focus:bg-navy focus:px-4 focus:py-2 focus:text-white"
       >
         Skip to content
       </a>
@@ -160,95 +196,89 @@ export default function Home() {
 
       <main id="main" className="flex-1">
         {/* ------------------------------------------------ hero */}
-        <section id="top" className="relative overflow-hidden bg-gradient-to-b from-mist via-white to-white">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -top-40 -right-40 size-[38rem] rounded-full bg-cloud/40 blur-3xl"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute top-60 -left-40 size-[28rem] rounded-full bg-azure/15 blur-3xl"
-          />
-          <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pt-16 pb-20 sm:px-6 sm:pt-24 lg:grid-cols-12 lg:px-8 lg:pb-28">
-            <div className="lg:col-span-7">
-              <p className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-navy shadow-sm ring-1 ring-navy/10">
-                <span className="size-2 rounded-full bg-ocean" />
+        <section id="top" className="relative overflow-hidden bg-white">
+          <WindLines className="pointer-events-none absolute right-0 bottom-0 h-[55%] w-full text-azure/35 lg:w-[70%]" />
+          <div className="relative mx-auto grid max-w-7xl gap-x-8 gap-y-16 px-4 pt-16 pb-20 sm:px-6 sm:pt-24 lg:grid-cols-12 lg:px-8 lg:pt-28 lg:pb-32">
+            <div className="lg:col-span-8">
+              <p className="flex items-center gap-3 text-sm font-semibold text-ocean">
+                <span aria-hidden className="h-px w-8 bg-ocean" />
                 AI consulting for small &amp; mid-sized businesses
               </p>
-              <h1 className="mt-6 font-display text-4xl leading-[1.08] font-extrabold tracking-tight text-navy text-balance sm:text-5xl lg:text-6xl">
-                AI that puts the <span className="text-ocean">wind at your back.</span>
+              <h1 className="mt-8 font-display text-5xl leading-[0.98] font-extrabold tracking-[-0.035em] text-navy text-balance sm:text-6xl lg:text-[5.5rem]">
+                AI that puts the wind at{" "}
+                <span className="relative inline-block whitespace-nowrap">
+                  your back.
+                  <Swoosh className="absolute -bottom-2 left-0 h-3 w-[105%] text-azure sm:-bottom-3 sm:h-4" />
+                </span>
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-ink text-pretty sm:text-xl">
+              <p className="mt-10 max-w-2xl text-lg leading-relaxed text-slate-ink text-pretty sm:text-xl">
                 Tailwinds Cloud Technologies helps growing businesses turn AI from a buzzword into a real advantage — with
                 practical strategy, hands-on coaching and the software to make it work.
               </p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                 <a
                   href={site.phone.href}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-ocean px-7 py-3.5 font-semibold text-white shadow-lg shadow-ocean/30 transition hover:bg-navy"
+                  className="inline-flex items-center justify-center gap-2 rounded-md bg-ocean px-6 py-3.5 font-semibold text-white transition hover:bg-navy"
                 >
                   <Icon name="phone" className="size-5" />
                   Call {site.phone.display}
                 </a>
                 <a
                   href={`mailto:${site.email}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 font-semibold text-navy ring-1 ring-navy/15 transition hover:ring-ocean"
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-navy/20 bg-white px-6 py-3.5 font-semibold text-navy transition hover:border-navy"
                 >
                   <Icon name="mail" className="size-5" />
                   Email us
                 </a>
               </div>
-              <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-ink">
-                {["Remote-first team", "Windsor, ON & Detroit, MI", "Serving Canada & the U.S."].map((t) => (
-                  <li key={t} className="flex items-center gap-2">
-                    <Icon name="check" className="size-4 text-ocean" />
+              <ul className="mt-10 flex flex-col gap-y-1 text-sm text-slate-ink sm:flex-row sm:flex-wrap">
+                {["Remote-first team", "Windsor, ON & Detroit, MI", "Serving Canada & the U.S."].map((t, i) => (
+                  <li key={t} className={i ? "sm:ml-4 sm:border-l sm:border-navy/20 sm:pl-4" : ""}>
                     {t}
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="relative lg:col-span-5">
-              <div className="relative mx-auto max-w-md rounded-[2rem] bg-white/70 p-8 shadow-2xl shadow-navy/10 ring-1 ring-navy/5 backdrop-blur sm:p-10">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/brand/icon.webp" alt="" width={800} height={493} className="mx-auto w-full max-w-xs" />
-                <dl className="mt-8 grid grid-cols-3 gap-4 border-t border-navy/10 pt-6 text-center">
-                  {[
-                    ["70%", "AI focus"],
-                    ["2", "Countries"],
-                    ["1", "Point of contact"],
-                  ].map(([v, l]) => (
-                    <div key={l}>
-                      <dt className="sr-only">{l}</dt>
-                      <dd className="font-display text-2xl font-extrabold text-navy">{v}</dd>
-                      <dd className="mt-1 text-xs font-medium tracking-wide text-slate-ink uppercase">{l}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            </div>
+            <dl className="self-end lg:col-span-3 lg:col-start-10">
+              {[
+                ["70%", "AI focus"],
+                ["2", "Countries"],
+                ["1", "Point of contact"],
+              ].map(([v, l]) => (
+                <div key={l} className="flex items-baseline justify-between gap-6 border-t border-navy/15 py-4 lg:flex-col-reverse lg:items-start lg:gap-1">
+                  <dt className="text-sm text-slate-ink">{l}</dt>
+                  <dd className="font-display text-5xl font-bold tracking-[-0.03em] text-navy tabular-nums lg:text-6xl">
+                    {v}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
 
         {/* ------------------------------------------------ value strip */}
-        <section aria-label="Why clients choose us" className="border-y border-navy/10 bg-white">
-          <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
+        <section aria-label="Why clients choose us" className="bg-navy text-white">
+          <div className="mx-auto grid max-w-7xl px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
             {[
               ["Vendor-neutral", "Advice based on your needs, not a reseller agreement."],
               ["Plain English", "Clear recommendations your whole team can act on."],
               ["Built for SMBs", "Right-sized engagements with measurable ROI."],
               ["Privacy-first", "Your data stays yours — on both sides of the border."],
-            ].map(([t, d]) => (
-              <div key={t}>
-                <p className="font-display font-bold text-navy">{t}</p>
-                <p className="mt-1 text-sm text-slate-ink">{d}</p>
+            ].map(([t, d], i) => (
+              <div
+                key={t}
+                className={`py-8 sm:pr-8 ${i ? "border-t border-white/15 sm:border-t-0" : ""} ${i % 2 ? "sm:border-l sm:border-white/15 sm:pl-8" : ""} ${i === 2 ? "lg:border-l lg:border-white/15 lg:pl-8" : ""}`}
+              >
+                <p className="font-display font-bold">{t}</p>
+                <p className="mt-1 text-sm text-mist/75">{d}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* ------------------------------------------------ services */}
-        <section id="services" className="py-24 sm:py-28">
+        <section id="services" className="py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeading
               eyebrow="Services"
@@ -256,42 +286,39 @@ export default function Home() {
               intro="Most of our work helps businesses adopt AI with confidence. When you need software to bring it to life, our engineers build it."
             />
 
-            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {aiServices.map((s) => (
-                <article
-                  key={s.title}
-                  className="group flex flex-col rounded-3xl border border-navy/10 bg-white p-7 transition hover:-translate-y-1 hover:border-azure/40 hover:shadow-xl hover:shadow-navy/5"
-                >
-                  <div className="flex size-12 items-center justify-center rounded-2xl bg-mist text-ocean transition group-hover:bg-ocean group-hover:text-white">
-                    <Icon name={s.icon} className="size-6" />
-                  </div>
-                  <h3 className="mt-6 font-display text-lg font-bold text-navy">{s.title}</h3>
-                  <p className="mt-3 leading-relaxed text-slate-ink">{s.body}</p>
-                  <ul className="mt-5 space-y-2 border-t border-navy/10 pt-5 text-sm text-ink">
-                    {s.points.map((p) => (
-                      <li key={p} className="flex items-start gap-2">
-                        <Icon name="check" className="mt-0.5 size-4 shrink-0 text-ocean" />
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
+            <div className="mt-16 lg:grid lg:grid-cols-12 lg:gap-x-8">
+              <ul className="border-b border-navy/15 lg:col-span-9 lg:col-start-4">
+                {aiServices.map((s) => (
+                  <li key={s.title} className="grid gap-x-8 gap-y-3 border-t border-navy/15 py-8 md:grid-cols-9">
+                    <h3 className="font-display text-xl leading-snug font-bold text-navy md:col-span-3">{s.title}</h3>
+                    <div className="md:col-span-6">
+                      <p className="leading-relaxed text-slate-ink">{s.body}</p>
+                      <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm font-medium text-navy">
+                        {s.points.map((p) => (
+                          <li key={p} className="flex items-center gap-2">
+                            <span aria-hidden className="size-1.5 bg-azure" />
+                            {p}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="mt-6 grid gap-6 rounded-3xl bg-navy p-8 text-white sm:p-10 lg:grid-cols-3 lg:items-center">
-              <div>
-                <Eyebrow light>Software development</Eyebrow>
-                <h3 className="mt-3 font-display text-2xl font-bold">The engineering behind the advice</h3>
-                <p className="mt-3 text-mist/80">
-                  Strategy is only as good as what gets built. Our developers make it real.
-                </p>
+            <div className="mt-20 grid gap-x-8 gap-y-10 rounded-xl bg-mist px-6 py-10 sm:px-10 lg:grid-cols-12 lg:py-12">
+              <div className="lg:col-span-4">
+                <Eyebrow>Software development</Eyebrow>
+                <h3 className="mt-3 font-display text-3xl leading-tight font-bold tracking-[-0.02em] text-navy">
+                  The engineering behind the advice
+                </h3>
+                <p className="mt-3 text-slate-ink">Strategy is only as good as what gets built. Our developers make it real.</p>
               </div>
               {softwareServices.map((s) => (
-                <div key={s.title} className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-                  <Icon name={s.icon} className="size-7 text-cloud" />
-                  <h4 className="mt-4 font-display font-bold">{s.title}</h4>
-                  <p className="mt-2 text-sm leading-relaxed text-mist/80">{s.body}</p>
+                <div key={s.title} className="border-t border-navy/15 pt-6 lg:col-span-4 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
+                  <h4 className="font-display text-lg font-bold text-navy">{s.title}</h4>
+                  <p className="mt-2 leading-relaxed text-slate-ink">{s.body}</p>
                 </div>
               ))}
             </div>
@@ -299,53 +326,44 @@ export default function Home() {
         </section>
 
         {/* ------------------------------------------------ approach */}
-        <section id="approach" className="relative overflow-hidden bg-navy py-24 text-white sm:py-28">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -bottom-48 -left-24 size-[36rem] rounded-full bg-ocean/40 blur-3xl"
-          />
-          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <section id="approach" className="bg-navy py-24 text-white sm:py-32">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeading
               light
               eyebrow="Our approach"
               title="A clear course from first conversation to lasting results"
               intro="Every engagement follows the same proven rhythm, scaled to your size and ambition."
             />
-            <ol className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <ol className="mt-16 grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-4">
               {steps.map((s) => (
-                <li key={s.n} className="rounded-3xl bg-white/5 p-7 ring-1 ring-white/10 backdrop-blur">
-                  <span className="font-display text-sm font-extrabold tracking-widest text-cloud">{s.n}</span>
-                  <h3 className="mt-3 font-display text-xl font-bold">{s.title}</h3>
-                  <p className="mt-3 leading-relaxed text-mist/80">{s.body}</p>
+                <li key={s.n} className="relative border-t border-white/25 pt-8">
+                  <span aria-hidden className="absolute -top-[5px] left-0 size-[9px] bg-cloud" />
+                  <span className="font-display text-sm font-bold text-cloud tabular-nums">{s.n}</span>
+                  <h3 className="mt-2 font-display text-2xl font-bold tracking-[-0.02em]">{s.title}</h3>
+                  <p className="mt-3 leading-relaxed text-mist/75">{s.body}</p>
                 </li>
               ))}
             </ol>
 
-            <div className="mt-20">
-              <h3 className="font-display text-2xl font-bold">Ways to work together</h3>
-              <div className="mt-8 grid gap-6 lg:grid-cols-3">
+            <div className="mt-28">
+              <div className="grid gap-x-8 border-t border-white/25 pt-6 lg:grid-cols-12">
+                <h3 className="font-display text-3xl font-bold tracking-[-0.02em] lg:col-span-9 lg:col-start-4">
+                  Ways to work together
+                </h3>
+              </div>
+              <div className="mt-12 grid gap-x-8 gap-y-12 lg:grid-cols-12">
+                <div className="hidden lg:col-span-3 lg:block" />
                 {engagements.map((e) => (
                   <div
                     key={e.name}
-                    className={`flex flex-col rounded-3xl p-8 ${
-                      e.featured ? "bg-white text-ink shadow-2xl shadow-black/20" : "bg-white/5 ring-1 ring-white/10"
-                    }`}
+                    className={`flex flex-col pt-6 lg:col-span-3 ${e.featured ? "border-t-4 border-cloud" : "border-t border-white/25"}`}
                   >
-                    <div className="flex items-center justify-between gap-4">
-                      <h4 className={`font-display text-lg font-bold ${e.featured ? "text-navy" : ""}`}>{e.name}</h4>
-                      <span
-                        className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                          e.featured ? "bg-mist text-ocean" : "bg-white/10 text-cloud"
-                        }`}
-                      >
-                        {e.length}
-                      </span>
-                    </div>
-                    <p className={`mt-4 leading-relaxed ${e.featured ? "text-slate-ink" : "text-mist/80"}`}>{e.body}</p>
-                    <ul className="mt-6 space-y-2 text-sm">
+                    <p className={`text-sm font-semibold ${e.featured ? "text-cloud" : "text-mist/70"}`}>{e.length}</p>
+                    <h4 className="mt-1 font-display text-2xl font-bold tracking-[-0.02em]">{e.name}</h4>
+                    <p className="mt-4 leading-relaxed text-mist/75">{e.body}</p>
+                    <ul className="mt-6 divide-y divide-white/10 border-y border-white/10 text-sm">
                       {e.points.map((p) => (
-                        <li key={p} className="flex items-center gap-2">
-                          <Icon name="check" className={`size-4 ${e.featured ? "text-ocean" : "text-cloud"}`} />
+                        <li key={p} className="py-2.5">
                           {p}
                         </li>
                       ))}
@@ -358,18 +376,19 @@ export default function Home() {
         </section>
 
         {/* ------------------------------------------------ examples */}
-        <section aria-labelledby="examples-title" className="py-24 sm:py-28">
+        <section aria-labelledby="examples-title" className="py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeading
               eyebrow="What it looks like"
               title={<span id="examples-title">AI that earns its keep</span>}
               intro="A few illustrative examples of the kinds of problems we help small and mid-sized businesses solve."
             />
-            <div className="mt-14 grid gap-6 lg:grid-cols-3">
+            <div className="mt-16 grid gap-x-8 gap-y-12 lg:grid-cols-12">
+              <div className="hidden lg:col-span-3 lg:block" />
               {examples.map((x) => (
-                <article key={x.title} className="rounded-3xl bg-mist/60 p-8 ring-1 ring-cloud/50">
-                  <p className="text-xs font-semibold tracking-wider text-ocean uppercase">{x.sector}</p>
-                  <h3 className="mt-3 font-display text-xl font-bold text-navy">{x.title}</h3>
+                <article key={x.title} className="border-t-2 border-navy pt-6 lg:col-span-3">
+                  <p className="text-sm font-semibold text-ocean">{x.sector}</p>
+                  <h3 className="mt-3 font-display text-xl leading-snug font-bold text-navy">{x.title}</h3>
                   <p className="mt-3 leading-relaxed text-slate-ink">{x.body}</p>
                 </article>
               ))}
@@ -378,14 +397,11 @@ export default function Home() {
         </section>
 
         {/* ------------------------------------------------ about */}
-        <section id="about" className="border-t border-navy/10 bg-white py-24 sm:py-28">
-          <div className="mx-auto grid max-w-7xl gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
-            <div>
-              <SectionHeading
-                eyebrow="About us"
-                title="Two cities. One border. One team in your corner."
-              />
-              <div className="mt-6 space-y-4 text-lg leading-relaxed text-slate-ink">
+        <section id="about" className="bg-mist py-24 sm:py-32">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading eyebrow="About us" title="Two cities. One border. One team in your corner." />
+            <div className="mt-12 grid gap-x-8 gap-y-14 lg:grid-cols-12">
+              <div className="space-y-5 text-lg leading-relaxed text-slate-ink lg:col-span-5 lg:col-start-4">
                 <p>
                   Tailwinds Cloud Technologies was founded on a simple idea: the AI revolution shouldn&apos;t be reserved
                   for companies with Silicon Valley budgets. Small and mid-sized businesses deserve the same expertise —
@@ -397,25 +413,24 @@ export default function Home() {
                   running a business in both Canada and the U.S., and we bring the same hands-on, roll-up-your-sleeves
                   approach to every client, wherever you are.
                 </p>
-                <p>
+                <p className="font-display text-2xl leading-snug font-bold tracking-[-0.015em] text-navy">
                   Like a good tailwind, our job is to help you go further, faster — and make the journey feel easier
                   along the way.
                 </p>
               </div>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                { icon: "globe" as const, t: "Remote-first", d: "Senior talent wherever it lives, collaborating in your time zone." },
-                { icon: "compass" as const, t: "Cross-border", d: "Windsor, Ontario and Detroit, Michigan — fluent in both markets." },
-                { icon: "shield" as const, t: "Trustworthy", d: "Transparent pricing, honest advice and no vendor kickbacks." },
-                { icon: "coach" as const, t: "People-centred", d: "We measure success by what your team can do after we leave." },
-              ].map((c) => (
-                <div key={c.t} className="rounded-3xl border border-navy/10 p-6">
-                  <Icon name={c.icon} className="size-7 text-ocean" />
-                  <h3 className="mt-4 font-display font-bold text-navy">{c.t}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-ink">{c.d}</p>
-                </div>
-              ))}
+              <dl className="lg:col-span-4 lg:col-start-9">
+                {[
+                  { t: "Remote-first", d: "Senior talent wherever it lives, collaborating in your time zone." },
+                  { t: "Cross-border", d: "Windsor, Ontario and Detroit, Michigan — fluent in both markets." },
+                  { t: "Trustworthy", d: "Transparent pricing, honest advice and no vendor kickbacks." },
+                  { t: "People-centred", d: "We measure success by what your team can do after we leave." },
+                ].map((c) => (
+                  <div key={c.t} className="border-t border-navy/15 py-5 first:border-t-2 first:border-navy">
+                    <dt className="font-display font-bold text-navy">{c.t}</dt>
+                    <dd className="mt-1 text-sm leading-relaxed text-slate-ink">{c.d}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
           </div>
         </section>
@@ -423,73 +438,80 @@ export default function Home() {
         <Insights />
 
         {/* ------------------------------------------------ faq */}
-        <section id="faq" className="py-24 sm:py-28">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <SectionHeading center eyebrow="FAQ" title="Questions we hear often" />
-            <div className="mt-12 divide-y divide-navy/10 rounded-3xl border border-navy/10">
-              {faqs.map((f) => (
-                <details key={f.q} className="group p-6 open:bg-mist/40">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display font-bold text-navy [&::-webkit-details-marker]:hidden">
-                    {f.q}
-                    <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-mist text-ocean transition group-open:rotate-45">
-                      <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth={2.5} aria-hidden>
-                        <path d="M12 5v14M5 12h14" strokeLinecap="round" />
+        <section id="faq" className="pb-24 sm:pb-32">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading eyebrow="FAQ" title="Questions we hear often" />
+            <div className="mt-12 lg:grid lg:grid-cols-12 lg:gap-x-8">
+              <div className="border-b border-navy/15 lg:col-span-9 lg:col-start-4">
+                {faqs.map((f) => (
+                  <details key={f.q} className="group border-t border-navy/15">
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6 font-display text-lg font-bold text-navy transition hover:text-ocean [&::-webkit-details-marker]:hidden">
+                      {f.q}
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="mt-1 size-5 shrink-0 text-ocean transition group-open:rotate-45"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        aria-hidden
+                      >
+                        <path d="M12 4v16M4 12h16" />
                       </svg>
-                    </span>
-                  </summary>
-                  <p className="mt-4 leading-relaxed text-slate-ink">{f.a}</p>
-                </details>
-              ))}
+                    </summary>
+                    <p className="max-w-2xl pb-6 leading-relaxed text-slate-ink">{f.a}</p>
+                  </details>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* ------------------------------------------------ contact */}
-        <section id="contact" className="px-4 pb-24 sm:px-6 lg:px-8">
-          <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-ocean to-navy px-6 py-16 text-white sm:px-12 sm:py-20">
-            <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 size-96 rounded-full bg-cloud/30 blur-3xl" />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/brand/icon-white.webp"
-              alt=""
-              width={800}
-              height={504}
-              className="pointer-events-none absolute -right-10 -bottom-10 hidden w-96 opacity-10 lg:block"
-            />
-            <div className="relative max-w-2xl">
-              <Eyebrow light>Contact</Eyebrow>
-              <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-balance sm:text-5xl">
+        <section id="contact" className="relative overflow-hidden bg-ocean text-white">
+          <WindLines className="pointer-events-none absolute right-0 bottom-0 h-1/2 w-full text-white/20" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/icon-white.webp"
+            alt=""
+            width={800}
+            height={504}
+            className="pointer-events-none absolute -right-16 -bottom-16 hidden w-[32rem] opacity-15 lg:block"
+          />
+          <div className="relative mx-auto grid max-w-7xl gap-x-8 px-4 py-24 sm:px-6 sm:py-32 lg:grid-cols-12 lg:px-8">
+            <div className="lg:col-span-3">
+              <p className="text-sm font-semibold text-white/80">Contact</p>
+            </div>
+            <div className="mt-4 lg:col-span-8 lg:mt-0">
+              <h2 className="font-display text-5xl leading-[0.98] font-extrabold tracking-[-0.035em] text-balance sm:text-7xl">
                 Ready to catch the tailwind?
               </h2>
-              <p className="mt-5 text-lg text-mist/85">
+              <p className="mt-6 max-w-2xl text-lg text-white/85">
                 Book a free 30-minute discovery call. We&apos;ll talk through your goals and leave you with at least one
                 idea you can put to work right away — no strings attached.
               </p>
-              <div className="mt-10 grid gap-4 sm:grid-cols-2">
-                <a
-                  href={site.phone.href}
-                  className="group rounded-2xl bg-white p-6 text-navy shadow-xl shadow-black/10 transition hover:-translate-y-0.5"
-                >
-                  <Icon name="phone" className="size-6 text-ocean" />
-                  <p className="mt-4 text-sm font-medium text-slate-ink">Call us</p>
-                  <p className="mt-1 font-display text-xl font-bold">{site.phone.display}</p>
+              <div className="mt-12 grid gap-x-8 sm:grid-cols-2">
+                <a href={site.phone.href} className="group border-t border-white/40 py-5 transition hover:border-white">
+                  <p className="flex items-center gap-2 text-sm font-medium text-white/75">
+                    <Icon name="phone" className="size-4" />
+                    Call us
+                  </p>
+                  <p className="mt-2 font-display text-2xl font-bold">{site.phone.display}</p>
                 </a>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="group rounded-2xl bg-white/10 p-6 ring-1 ring-white/20 transition hover:-translate-y-0.5 hover:bg-white/15"
-                >
-                  <Icon name="mail" className="size-6 text-cloud" />
-                  <p className="mt-4 text-sm font-medium text-mist/80">Email us</p>
-                  <p className="mt-1 font-display text-lg font-bold sm:text-xl">
+                <a href={`mailto:${site.email}`} className="group border-t border-white/40 py-5 transition hover:border-white">
+                  <p className="flex items-center gap-2 text-sm font-medium text-white/75">
+                    <Icon name="mail" className="size-4" />
+                    Email us
+                  </p>
+                  <p className="mt-2 font-display text-2xl font-bold">
                     {/* allow a clean wrap after "@" on narrow phones */}
                     {site.email.split("@")[0]}@<wbr />
                     {site.email.split("@")[1]}
                   </p>
                 </a>
               </div>
-              <p className="mt-8 text-sm text-mist/70">
+              <p className="mt-8 text-sm text-white/75">
                 Existing client? Reach our support team at{" "}
-                <a href={`mailto:${site.supportEmail}`} className="font-semibold text-white underline-offset-4 hover:underline">
+                <a href={`mailto:${site.supportEmail}`} className="font-semibold text-white underline underline-offset-4">
                   {site.supportEmail}
                 </a>
                 .
@@ -501,16 +523,16 @@ export default function Home() {
 
       {/* ------------------------------------------------ footer */}
       <footer className="bg-navy text-mist/80">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3 lg:px-8">
-          <div>
+        <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-12 lg:px-8">
+          <div className="md:col-span-6 lg:col-span-5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/brand/logo-horizontal-white.webp" alt={site.name} width={720} height={169} className="h-12 w-auto" />
             <p className="mt-4 max-w-xs text-sm">
               AI strategy, consulting, coaching and software for small and mid-sized businesses.
             </p>
           </div>
-          <div>
-            <h2 className="font-display text-sm font-bold tracking-wider text-white uppercase">Contact</h2>
+          <div className="md:col-span-3 lg:col-start-7">
+            <h2 className="text-sm font-semibold text-white">Contact</h2>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
                 <a href={site.phone.href} className="hover:text-white">{site.phone.display}</a>
@@ -523,8 +545,8 @@ export default function Home() {
               </li>
             </ul>
           </div>
-          <div>
-            <h2 className="font-display text-sm font-bold tracking-wider text-white uppercase">Where we work</h2>
+          <div className="md:col-span-3 lg:col-start-10">
+            <h2 className="text-sm font-semibold text-white">Where we work</h2>
             <ul className="mt-4 space-y-2 text-sm">
               <li>Windsor, Ontario, Canada</li>
               <li>Detroit, Michigan, USA</li>

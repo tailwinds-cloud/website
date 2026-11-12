@@ -4,7 +4,7 @@ export const site = {
   url: "https://tailwinds.cloud",
   tagline: "AI that puts the wind at your back.",
   description:
-    "Tailwinds Cloud Technologies helps small and mid-sized businesses put AI to work — practical AI strategy, consulting, coaching and custom software. A remote-first team serving Windsor, Detroit and clients across Canada and the U.S.",
+    "Hands-on AI coaching, strategy and custom software for small and mid-sized businesses in Detroit, Michigan and Windsor, Ontario. Free discovery call.",
   phone: { display: "+1 (226) 602-3099", href: "tel:+12266023099" },
   email: "inquiries@tailwinds.cloud",
   supportEmail: "support@tailwinds.cloud",

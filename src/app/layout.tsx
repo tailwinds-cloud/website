@@ -18,7 +18,7 @@ const gaId = process.env.NEXT_PUBLIC_GA_ID;
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — AI Strategy, Consulting & Software`,
+    default: "AI Consulting & Automation in Detroit, MI | Tailwinds",
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     type: "website",
     url: site.url,
     siteName: site.name,
-    title: `${site.name} — ${site.tagline}`,
+    title: "AI Consulting & Automation in Detroit, MI | Tailwinds",
     description: site.description,
     locale: "en_CA",
   },

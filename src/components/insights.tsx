@@ -14,26 +14,26 @@ const headlines = (title: string) =>
 export function Insights() {
   const updated = fmt.format(new Date(data.updated));
   return (
-    <section id="insights" className="bg-mist/60 py-24 sm:py-28">
+    <section id="insights" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <SectionHeading
-            eyebrow="Insights"
-            title="What's moving in AI and software"
-            intro="We read the industry so you don't have to. Here are the latest headlines from TLDR's daily AI and developer newsletters — the same signals we use to keep our clients' roadmaps current."
-          />
-          <p className="shrink-0 text-sm text-slate-ink">
-            Updated {updated} · via{" "}
-            <a href="https://tldr.tech" className="font-semibold text-ocean hover:underline" rel="noopener" target="_blank">
-              TLDR
-            </a>
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="Insights"
+          title="What's moving in AI and software"
+          intro="We read the industry so you don't have to. Here are the latest headlines from TLDR's daily AI and developer newsletters — the same signals we use to keep our clients' roadmaps current."
+          aside={
+            <p className="mt-4 text-sm text-slate-ink">
+              Updated {updated} · via{" "}
+              <a href="https://tldr.tech" className="font-semibold text-ocean hover:underline" rel="noopener" target="_blank">
+                TLDR
+              </a>
+            </p>
+          }
+        />
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-2">
-          {data.feeds.map((feed) => (
-            <div key={feed.id} className="rounded-3xl border border-navy/10 bg-white p-6 shadow-sm sm:p-8">
-              <div className="flex items-center justify-between">
+        <div className="mt-14 grid gap-x-8 gap-y-14 lg:grid-cols-12">
+          {data.feeds.map((feed, i) => (
+            <div key={feed.id} className={`lg:col-span-4 ${i === 0 ? "lg:col-start-4" : ""} ${i === 1 ? "lg:col-span-5" : ""}`}>
+              <div className="flex items-baseline justify-between border-b-2 border-navy pb-3">
                 <h3 className="font-display text-lg font-bold text-navy">{feed.name}</h3>
                 <a
                   href={feed.home}
@@ -48,28 +48,21 @@ export function Insights() {
               {feed.items.length === 0 ? (
                 <p className="mt-6 text-slate-ink">Fresh headlines are on their way — check back soon.</p>
               ) : (
-                <ol className="mt-6 divide-y divide-navy/10">
+                <ol className="divide-y divide-navy/10">
                   {feed.items.map((item) => (
                     <li key={item.link}>
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener"
-                        className="group -mx-3 block rounded-2xl px-3 py-4 transition hover:bg-mist/70"
-                      >
-                        <time dateTime={item.date} className="text-xs font-semibold uppercase tracking-wider text-azure">
+                      <a href={item.link} target="_blank" rel="noopener" className="group grid grid-cols-[5.5rem_1fr] gap-4 py-4">
+                        <time dateTime={item.date} className="pt-0.5 text-xs font-semibold text-slate-ink tabular-nums">
                           {fmt.format(new Date(item.date))}
                         </time>
-                        <ul className="mt-2 flex flex-wrap gap-2">
-                          {headlines(item.title).map((h) => (
-                            <li
-                              key={h}
-                              className="rounded-full bg-mist px-3 py-1 text-sm text-navy ring-1 ring-cloud/60 group-hover:bg-white"
-                            >
+                        <span className="text-[15px] leading-relaxed text-navy group-hover:text-ocean">
+                          {headlines(item.title).map((h, j) => (
+                            <span key={h}>
+                              {j ? <span aria-hidden className="px-2 text-azure">/</span> : null}
                               {h}
-                            </li>
+                            </span>
                           ))}
-                        </ul>
+                        </span>
                       </a>
                     </li>
                   ))}
